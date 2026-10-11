@@ -42,7 +42,12 @@ You turn a topic, research question or working title into a **traceable, verifie
 7. **Evidence matrix | مصفوفة الأدلة** — build it **before drafting**; never infer missing values. Read [verification-and-appraisal](references/verification-and-appraisal.md).
 8. **Synthesize, gaps, theory | التركيب والفجوات** — synthesize analytically (not serial summaries), classify gaps with the 12-type taxonomy, analyse theories. Read [synthesis-and-gaps](references/synthesis-and-gaps.md).
 9. **Systematic/PRISMA (if requested) | المنهجية** — document the protocol items; generate flow data only from actual counts, or downgrade the review type honestly. Read [systematic-prisma](references/systematic-prisma.md).
-10. **Draft, audit, deliver | الكتابة والتدقيق والتسليم** — choose the structure, apply level-appropriate writing standards, run the citation audit, produce the standard outputs, format the document, and pass the final quality gate before delivery. Read [writing-and-delivery](references/writing-and-delivery.md).
+10. **Draft, audit, deliver | الكتابة والتدقيق والتسليم** — choose the structure, apply level-appropriate writing standards, run the citation audit, produce the standard outputs, and pass the final quality gate. Read [writing-and-delivery](references/writing-and-delivery.md).
+11. **Two files: Markdown + Word | ملفان: Markdown وWord** — unless the user asks otherwise, deliver **both** `<slug>.md` and an editable `<slug>.docx`:
+    1. Write the full review to `<slug>.md` first; it is the single source.
+    2. Convert it: `python scripts/md_to_docx.py <slug>.md` (path relative to this skill's folder; standard-library Python 3.9+, nothing to install). It handles Arabic RTL and English LTR per paragraph, tables, lists, links, hanging-indent references, and puts wide tables (8+ columns, e.g. the full evidence matrix) on landscape pages.
+    3. If `scripts/md_to_docx.py` is not present (single-file installs), download it from `https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/skills/evidence-based-literature-review/scripts/md_to_docx.py` and run it. If Python cannot run, use any Word-generation capability you have (e.g. `pandoc <slug>.md -o <slug>.docx`, or a built-in document tool).
+    4. Confirm the `.docx` exists and report the converter's summary line. If no route works, deliver the `.md`, say plainly that the Word file was **not** produced, and give the user the exact command to run.
 
 ## القواعد والممنوعات (Rules)
 - **Never invent** a citation, DOI, author, title, journal, year, pages, sample, method, statistic, effect size, quotation or finding — **يمنع اختلاق** أي مرجع أو بيان أو نتيجة أو اقتباس.
@@ -54,7 +59,7 @@ You turn a topic, research question or working title into a **traceable, verifie
 - Represent contradictory, negative and null findings; absence of evidence is not evidence of absence; match wording to evidence strength ("associated with" ≠ "causes").
 - Never present a secondary citation as the primary study; keep in-text citations and references one-to-one.
 - Missing one connector must not block the review: use the strongest alternative, reduce claim strength, disclose material limitations — never silently substitute model knowledge.
-- Never claim a folder, collection or workspace was created in a connector unless it actually was.
+- Never claim a folder, collection, workspace or Word file was created unless it actually was.
 - **Stop and explain** when: the topic is too ambiguous for a defensible search; a systematic review is requested but reproducible searching is impossible; needed full texts are unavailable; evidence is too heterogeneous for a requested meta-analysis; metadata conflicts remain unresolved; or the user requests fabrication. Otherwise proceed with the strongest defensible workflow.
 - The full 20 integrity rules and shared operational rules are in [integrity-rules](references/integrity-rules.md); apply them on every run.
 
@@ -62,7 +67,7 @@ You turn a topic, research question or working title into a **traceable, verifie
 ### مثال 1: طلب بإعدادات افتراضية
 **المدخل:** «اكتب مراجعة أدبيات عن أثر الاحتراق الوظيفي على جودة الرعاية التمريضية.»
 
-**المخرج المتوقع:** يفحص الأدوات الأكاديمية المتاحة بصمت، ثم يعرض: «استخدام الإعدادات الذكية (50 مرجعًا، APA 7، دكتوراه، مراجعة سردية نقدية، بنية موضوعية) أم التخصيص؟». بعد الاختيار ينفّذ البحث متعدد الطبقات، ويبني مصفوفة الأدلة قبل الكتابة، ويسلّم المخرجات العشرة باللغة العربية مع بقاء بيانات المراجع الإنجليزية بلغتها، وملاحظة تدقيق تذكر المراجع غير المتحقق منها والنصوص غير المتاحة.
+**المخرج المتوقع:** يفحص الأدوات الأكاديمية المتاحة بصمت، ثم يعرض: «استخدام الإعدادات الذكية (50 مرجعًا، APA 7، دكتوراه، مراجعة سردية نقدية، بنية موضوعية) أم التخصيص؟». بعد الاختيار ينفّذ البحث متعدد الطبقات، ويبني مصفوفة الأدلة قبل الكتابة، ويسلّم المخرجات العشرة باللغة العربية مع بقاء بيانات المراجع الإنجليزية بلغتها، وملاحظة تدقيق تذكر المراجع غير المتحقق منها والنصوص غير المتاحة. ويسلّم ملفين: `burnout-care-review.md` و`burnout-care-review.docx` (بعد تشغيل `scripts/md_to_docx.py`)، مع سطر الملخص الذي طبعه المحوّل.
 
 ### مثال 2: طلب PRISMA في بيئة لا تسمح ببحث قابل لإعادة الإنتاج
 **Input:** "Do a PRISMA systematic review on mindfulness apps and anxiety, 80 studies, with the flow diagram."
@@ -82,4 +87,5 @@ You turn a topic, research question or working title into a **traceable, verifie
 - [verification-and-appraisal](references/verification-and-appraisal.md): bibliographic verification hierarchy, critical appraisal tools, evidence matrix fields. Read in steps 6–7.
 - [synthesis-and-gaps](references/synthesis-and-gaps.md): analytical synthesis, 12-type gap taxonomy, theoretical analysis. Read in step 8.
 - [systematic-prisma](references/systematic-prisma.md): systematic/PRISMA protocol items and honest downgrading. Read only when systematic or PRISMA work is requested.
-- [writing-and-delivery](references/writing-and-delivery.md): citation audit, structures, writing standards, outputs, document delivery, final quality gate. Read in step 10.
+- [writing-and-delivery](references/writing-and-delivery.md): citation audit, structures, writing standards, outputs, document delivery (Markdown + Word), final quality gate. Read in steps 10–11.
+- `scripts/md_to_docx.py`: converts the review's Markdown into an editable Word file (no dependencies). Run in step 11.

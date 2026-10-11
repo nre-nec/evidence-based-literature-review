@@ -59,12 +59,25 @@ Unless the user requests less, provide:
 
 For systematic reviews, also provide reproducibility/PRISMA information.
 
-### Step 19 — Document delivery
-- **English Word output:** LTR, professional academic typography, clear heading hierarchy, readable tables, consistent references.
-- **Arabic Word output:** RTL paragraphs/headings, appropriate Arabic alignment/font, correct mixed-direction handling for DOI/Latin metadata, and original-language reference entries.
-- **Markdown:** clear heading hierarchy and valid tables.
+### Step 19 — Document delivery: Markdown + Word
+Deliver two files unless the user asks otherwise: `<slug>.md` (source) and `<slug>.docx` (editable Word), produced from the same content.
 
-Never claim that a connector folder, database collection, or workspace was created unless it actually was.
+**Writing the Markdown so it converts cleanly** (`scripts/md_to_docx.py` supports exactly this subset):
+- headings `#` to `####`; one `#` title at the top;
+- paragraphs, `**bold**`, `*italic*` (for journal names and volumes in APA), inline `code`;
+- bullet and numbered lists, up to 3 levels (indent 2 spaces per level);
+- pipe tables with a header row; the full evidence matrix may have many columns — tables with 8+ columns are placed on landscape pages automatically;
+- `> quotes`, `---` rules, links `[text](url)` and bare `https://doi.org/...` (become clickable);
+- put the reference list under a heading named `References` / `المراجع` so entries get a hanging indent;
+- no images, footnotes, HTML or math (images keep only their alt text).
+
+**Direction:** each paragraph takes the direction of its first letter (Arabic → RTL, Latin → LTR), so an Arabic review keeps English reference entries left-to-right. Short parenthetical citations in the other script, e.g. `(Smith & Lee, 2020)`, are kept on one line.
+
+**Defaults:** A4, 2.54 cm margins, 1.5 line spacing, Times New Roman 12 pt for Latin and Simplified Arabic 14 pt for Arabic. Change with `--font-latin`, `--font-arabic`, `--size`, `--size-arabic`.
+
+**Fallbacks:** script missing → download it from the repository (raw URL in SKILL.md step 11); Python unavailable → `pandoc <slug>.md -o <slug>.docx` or a built-in document tool; nothing available → deliver the Markdown and state that the Word file was not produced.
+
+Never claim that a Word file, connector folder, database collection, or workspace was created unless it actually was.
 
 ### Final quality gate
 Do not deliver until applicable checks pass:
@@ -85,6 +98,7 @@ Do not deliver until applicable checks pass:
 - [ ] Citation style is consistent.
 - [ ] No fabricated PRISMA counts.
 - [ ] Systematic-review terminology is used only when justified.
+- [ ] Both `.md` and `.docx` delivered (or the missing Word file is stated plainly).
 
 ## العربية
 
@@ -136,12 +150,17 @@ Do not deliver until applicable checks pass:
 
 تضاف متطلبات إعادة الإنتاج وPRISMA للمراجعة المنهجية.
 
-### الخطوة التاسعة عشرة — إخراج المستند
-- **Word العربي:** RTL، محاذاة وخط مناسب، معالجة صحيحة للنص المختلط وDOI، وبقاء بيانات المراجع بلغتها الأصلية.
-- **Word الإنجليزي:** LTR، تنسيق أكاديمي مهني، عناوين وجداول ومراجع متسقة.
-- **Markdown:** عناوين واضحة وجداول سليمة.
+### الخطوة التاسعة عشرة — إخراج المستند: Markdown وWord
+سلّم ملفين ما لم يطلب المستخدم غير ذلك: `<slug>.md` (المصدر) و`<slug>.docx` (Word قابل للتعديل)، بالمحتوى نفسه.
 
-لا تدّعِ إنشاء مجلد أو مجموعة داخل موصل إلا إذا أُنشئت فعليًا.
+- اكتب Markdown بالعناصر التي يدعمها المحوّل فقط: عناوين، فقرات، غامق ومائل، قوائم حتى 3 مستويات، جداول، اقتباسات، روابط وDOI. ولا تستخدم صورًا أو حواشي أو HTML.
+- ضع قائمة المراجع تحت عنوان «المراجع» أو `References` لتحصل على مسافة بادئة معلّقة.
+- اتجاه كل فقرة يتحدد بأول حرف فيها: العربية من اليمين، والإنجليزية من اليسار، فتبقى المراجع الإنجليزية سليمة داخل مراجعة عربية.
+- الجداول العريضة (8 أعمدة فأكثر، مثل مصفوفة الأدلة الكاملة) توضع تلقائيًا في صفحات أفقية.
+- الإعدادات الافتراضية: A4، هوامش 2.54 سم، تباعد 1.5، Times New Roman 12 للاتيني وSimplified Arabic 14 للعربي.
+- البدائل: إن غاب السكربت فنزّله من المستودع، وإن تعذّر Python فاستخدم pandoc أو أداة مستندات مدمجة، وإن تعذّر كل ذلك فسلّم Markdown وصرّح بأن ملف Word لم يُنشأ.
+
+لا تدّعِ إنشاء ملف Word أو مجلد أو مجموعة داخل موصل إلا إذا أُنشئت فعليًا.
 
 ### بوابة الجودة النهائية
 لا تسلّم قبل تحقق ما ينطبق:
@@ -162,3 +181,4 @@ Do not deliver until applicable checks pass:
 - [ ] نمط التوثيق متسق.
 - [ ] لا أعداد PRISMA مختلقة.
 - [ ] لا تُستخدم تسمية "مراجعة منهجية" دون استحقاق.
+- [ ] سُلّم الملفان `.md` و`.docx` (أو صُرّح بعدم إنشاء ملف Word).

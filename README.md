@@ -33,10 +33,12 @@ A connector-agnostic, bilingual (Arabic/English) AI skill for producing **tracea
 - Appraises each study with a design-appropriate tool (RoB 2, ROBINS-I, JBI, CASP, AMSTAR 2, QUADAS-2, NOS, GRADE).
 - Builds an evidence matrix before drafting, synthesizes analytically, and classifies gaps using a 12-type taxonomy.
 - Audits citations and refuses to fabricate sources, statistics, or PRISMA counts.
+- Delivers **two files**: the review as Markdown and as an editable **Word (.docx)** file, with correct Arabic RTL / English LTR layout, tables (wide evidence matrices on landscape pages), lists, links and hanging-indent references. The converter (`scripts/md_to_docx.py`) needs only Python, no installs.
 
 - تبني نموذج بحث وبحثًا متعدد الطبقات، وتتحقق من DOI والبيانات الببليوجرافية من مصادر مستقلة.
 - تقيّم كل دراسة بأداة مناسبة لتصميمها، وتبني مصفوفة أدلة قبل الكتابة، وتصنّف الفجوات البحثية في 12 نوعًا.
 - تدقق الاستشهادات، ولا تختلق مراجع أو إحصاءات أو أعداد PRISMA.
+- تسلّم **ملفين**: المراجعة بصيغة Markdown، ونسخة **Word قابلة للتعديل** باتجاه صحيح للعربية والإنجليزية.
 
 ## Structure | الهيكل
 
@@ -44,6 +46,7 @@ A connector-agnostic, bilingual (Arabic/English) AI skill for producing **tracea
 skills/evidence-based-literature-review/
 ├── SKILL.md                 # entry point (bilingual procedure and rules)
 ├── metadata.json            # name, description, triggers, reference index
+├── scripts/md_to_docx.py    # Markdown -> editable Word, standard-library Python
 ├── references/
 │   ├── integrity-rules.md
 │   ├── tool-routing.md
@@ -53,7 +56,7 @@ skills/evidence-based-literature-review/
 │   ├── synthesis-and-gaps.md
 │   ├── systematic-prisma.md
 │   └── writing-and-delivery.md
-└── tests/triggers.json      # manual trigger test prompts
+└── tests/                   # trigger test prompts + converter fixture
 INSTALL.md                   # install guide for AI agents (generated)
 install/                     # zip, single-file text, Cursor rule (generated)
 ```
@@ -64,6 +67,8 @@ install/                     # zip, single-file text, Cursor rule (generated)
 |---|---|
 | Structure validated with [skill-foundry](https://github.com/nre-nec/skill-foundry) `validate --strict` | Passed (2026-10-11) |
 | Install from the repository link alone (fresh Claude Code agent, path A, sandbox home) | Passed (2026-10-11): installed files identical to source |
+| Word output: `md_to_docx.py` on an Arabic/English fixture, opened in Microsoft Word 16 (Windows 11) | Passed (2026-10-11): RTL/LTR paragraphs, RTL table, lists, links, hanging references, landscape evidence matrix |
+| Skill used in Cursor | Reported working by the user (2026-10-11), before the Word output was added |
 | Trigger tests in `tests/triggers.json` run in a live environment | Not yet verified |
 | Behaviour tested end-to-end on Claude Code / Claude.ai / other models | Not yet verified |
 

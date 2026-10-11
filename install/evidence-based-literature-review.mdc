@@ -50,7 +50,12 @@ You turn a topic, research question or working title into a **traceable, verifie
 7. **Evidence matrix | مصفوفة الأدلة** — build it **before drafting**; never infer missing values. Read verification-and-appraisal [-> appendix: references/verification-and-appraisal.md].
 8. **Synthesize, gaps, theory | التركيب والفجوات** — synthesize analytically (not serial summaries), classify gaps with the 12-type taxonomy, analyse theories. Read synthesis-and-gaps [-> appendix: references/synthesis-and-gaps.md].
 9. **Systematic/PRISMA (if requested) | المنهجية** — document the protocol items; generate flow data only from actual counts, or downgrade the review type honestly. Read systematic-prisma [-> appendix: references/systematic-prisma.md].
-10. **Draft, audit, deliver | الكتابة والتدقيق والتسليم** — choose the structure, apply level-appropriate writing standards, run the citation audit, produce the standard outputs, format the document, and pass the final quality gate before delivery. Read writing-and-delivery [-> appendix: references/writing-and-delivery.md].
+10. **Draft, audit, deliver | الكتابة والتدقيق والتسليم** — choose the structure, apply level-appropriate writing standards, run the citation audit, produce the standard outputs, and pass the final quality gate. Read writing-and-delivery [-> appendix: references/writing-and-delivery.md].
+11. **Two files: Markdown + Word | ملفان: Markdown وWord** — unless the user asks otherwise, deliver **both** `<slug>.md` and an editable `<slug>.docx`:
+    1. Write the full review to `<slug>.md` first; it is the single source.
+    2. Convert it: `python scripts/md_to_docx.py <slug>.md` (path relative to this skill's folder; standard-library Python 3.9+, nothing to install). It handles Arabic RTL and English LTR per paragraph, tables, lists, links, hanging-indent references, and puts wide tables (8+ columns, e.g. the full evidence matrix) on landscape pages.
+    3. If `scripts/md_to_docx.py` is not present (single-file installs), download it from `https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/skills/evidence-based-literature-review/scripts/md_to_docx.py` and run it. If Python cannot run, use any Word-generation capability you have (e.g. `pandoc <slug>.md -o <slug>.docx`, or a built-in document tool).
+    4. Confirm the `.docx` exists and report the converter's summary line. If no route works, deliver the `.md`, say plainly that the Word file was **not** produced, and give the user the exact command to run.
 
 ## القواعد والممنوعات (Rules)
 - **Never invent** a citation, DOI, author, title, journal, year, pages, sample, method, statistic, effect size, quotation or finding — **يمنع اختلاق** أي مرجع أو بيان أو نتيجة أو اقتباس.
@@ -62,7 +67,7 @@ You turn a topic, research question or working title into a **traceable, verifie
 - Represent contradictory, negative and null findings; absence of evidence is not evidence of absence; match wording to evidence strength ("associated with" ≠ "causes").
 - Never present a secondary citation as the primary study; keep in-text citations and references one-to-one.
 - Missing one connector must not block the review: use the strongest alternative, reduce claim strength, disclose material limitations — never silently substitute model knowledge.
-- Never claim a folder, collection or workspace was created in a connector unless it actually was.
+- Never claim a folder, collection, workspace or Word file was created unless it actually was.
 - **Stop and explain** when: the topic is too ambiguous for a defensible search; a systematic review is requested but reproducible searching is impossible; needed full texts are unavailable; evidence is too heterogeneous for a requested meta-analysis; metadata conflicts remain unresolved; or the user requests fabrication. Otherwise proceed with the strongest defensible workflow.
 - The full 20 integrity rules and shared operational rules are in integrity-rules [-> appendix: references/integrity-rules.md]; apply them on every run.
 
@@ -70,7 +75,7 @@ You turn a topic, research question or working title into a **traceable, verifie
 ### مثال 1: طلب بإعدادات افتراضية
 **المدخل:** «اكتب مراجعة أدبيات عن أثر الاحتراق الوظيفي على جودة الرعاية التمريضية.»
 
-**المخرج المتوقع:** يفحص الأدوات الأكاديمية المتاحة بصمت، ثم يعرض: «استخدام الإعدادات الذكية (50 مرجعًا، APA 7، دكتوراه، مراجعة سردية نقدية، بنية موضوعية) أم التخصيص؟». بعد الاختيار ينفّذ البحث متعدد الطبقات، ويبني مصفوفة الأدلة قبل الكتابة، ويسلّم المخرجات العشرة باللغة العربية مع بقاء بيانات المراجع الإنجليزية بلغتها، وملاحظة تدقيق تذكر المراجع غير المتحقق منها والنصوص غير المتاحة.
+**المخرج المتوقع:** يفحص الأدوات الأكاديمية المتاحة بصمت، ثم يعرض: «استخدام الإعدادات الذكية (50 مرجعًا، APA 7، دكتوراه، مراجعة سردية نقدية، بنية موضوعية) أم التخصيص؟». بعد الاختيار ينفّذ البحث متعدد الطبقات، ويبني مصفوفة الأدلة قبل الكتابة، ويسلّم المخرجات العشرة باللغة العربية مع بقاء بيانات المراجع الإنجليزية بلغتها، وملاحظة تدقيق تذكر المراجع غير المتحقق منها والنصوص غير المتاحة. ويسلّم ملفين: `burnout-care-review.md` و`burnout-care-review.docx` (بعد تشغيل `scripts/md_to_docx.py`)، مع سطر الملخص الذي طبعه المحوّل.
 
 ### مثال 2: طلب PRISMA في بيئة لا تسمح ببحث قابل لإعادة الإنتاج
 **Input:** "Do a PRISMA systematic review on mindfulness apps and anxiety, 80 studies, with the flow diagram."
@@ -90,7 +95,8 @@ You turn a topic, research question or working title into a **traceable, verifie
 - verification-and-appraisal [-> appendix: references/verification-and-appraisal.md]: bibliographic verification hierarchy, critical appraisal tools, evidence matrix fields. Read in steps 6–7.
 - synthesis-and-gaps [-> appendix: references/synthesis-and-gaps.md]: analytical synthesis, 12-type gap taxonomy, theoretical analysis. Read in step 8.
 - systematic-prisma [-> appendix: references/systematic-prisma.md]: systematic/PRISMA protocol items and honest downgrading. Read only when systematic or PRISMA work is requested.
-- writing-and-delivery [-> appendix: references/writing-and-delivery.md]: citation audit, structures, writing standards, outputs, document delivery, final quality gate. Read in step 10.
+- writing-and-delivery [-> appendix: references/writing-and-delivery.md]: citation audit, structures, writing standards, outputs, document delivery (Markdown + Word), final quality gate. Read in steps 10–11.
+- `scripts/md_to_docx.py`: converts the review's Markdown into an editable Word file (no dependencies). Run in step 11.
 
 
 ---
@@ -748,12 +754,25 @@ Unless the user requests less, provide:
 
 For systematic reviews, also provide reproducibility/PRISMA information.
 
-### Step 19 — Document delivery
-- **English Word output:** LTR, professional academic typography, clear heading hierarchy, readable tables, consistent references.
-- **Arabic Word output:** RTL paragraphs/headings, appropriate Arabic alignment/font, correct mixed-direction handling for DOI/Latin metadata, and original-language reference entries.
-- **Markdown:** clear heading hierarchy and valid tables.
+### Step 19 — Document delivery: Markdown + Word
+Deliver two files unless the user asks otherwise: `<slug>.md` (source) and `<slug>.docx` (editable Word), produced from the same content.
 
-Never claim that a connector folder, database collection, or workspace was created unless it actually was.
+**Writing the Markdown so it converts cleanly** (`scripts/md_to_docx.py` supports exactly this subset):
+- headings `#` to `####`; one `#` title at the top;
+- paragraphs, `**bold**`, `*italic*` (for journal names and volumes in APA), inline `code`;
+- bullet and numbered lists, up to 3 levels (indent 2 spaces per level);
+- pipe tables with a header row; the full evidence matrix may have many columns — tables with 8+ columns are placed on landscape pages automatically;
+- `> quotes`, `---` rules, links `text [-> appendix: url]` and bare `https://doi.org/...` (become clickable);
+- put the reference list under a heading named `References` / `المراجع` so entries get a hanging indent;
+- no images, footnotes, HTML or math (images keep only their alt text).
+
+**Direction:** each paragraph takes the direction of its first letter (Arabic → RTL, Latin → LTR), so an Arabic review keeps English reference entries left-to-right. Short parenthetical citations in the other script, e.g. `(Smith & Lee, 2020)`, are kept on one line.
+
+**Defaults:** A4, 2.54 cm margins, 1.5 line spacing, Times New Roman 12 pt for Latin and Simplified Arabic 14 pt for Arabic. Change with `--font-latin`, `--font-arabic`, `--size`, `--size-arabic`.
+
+**Fallbacks:** script missing → download it from the repository (raw URL in SKILL.md step 11); Python unavailable → `pandoc <slug>.md -o <slug>.docx` or a built-in document tool; nothing available → deliver the Markdown and state that the Word file was not produced.
+
+Never claim that a Word file, connector folder, database collection, or workspace was created unless it actually was.
 
 ### Final quality gate
 Do not deliver until applicable checks pass:
@@ -774,6 +793,7 @@ Do not deliver until applicable checks pass:
 - [ ] Citation style is consistent.
 - [ ] No fabricated PRISMA counts.
 - [ ] Systematic-review terminology is used only when justified.
+- [ ] Both `.md` and `.docx` delivered (or the missing Word file is stated plainly).
 
 ## العربية
 
@@ -825,12 +845,17 @@ Do not deliver until applicable checks pass:
 
 تضاف متطلبات إعادة الإنتاج وPRISMA للمراجعة المنهجية.
 
-### الخطوة التاسعة عشرة — إخراج المستند
-- **Word العربي:** RTL، محاذاة وخط مناسب، معالجة صحيحة للنص المختلط وDOI، وبقاء بيانات المراجع بلغتها الأصلية.
-- **Word الإنجليزي:** LTR، تنسيق أكاديمي مهني، عناوين وجداول ومراجع متسقة.
-- **Markdown:** عناوين واضحة وجداول سليمة.
+### الخطوة التاسعة عشرة — إخراج المستند: Markdown وWord
+سلّم ملفين ما لم يطلب المستخدم غير ذلك: `<slug>.md` (المصدر) و`<slug>.docx` (Word قابل للتعديل)، بالمحتوى نفسه.
 
-لا تدّعِ إنشاء مجلد أو مجموعة داخل موصل إلا إذا أُنشئت فعليًا.
+- اكتب Markdown بالعناصر التي يدعمها المحوّل فقط: عناوين، فقرات، غامق ومائل، قوائم حتى 3 مستويات، جداول، اقتباسات، روابط وDOI. ولا تستخدم صورًا أو حواشي أو HTML.
+- ضع قائمة المراجع تحت عنوان «المراجع» أو `References` لتحصل على مسافة بادئة معلّقة.
+- اتجاه كل فقرة يتحدد بأول حرف فيها: العربية من اليمين، والإنجليزية من اليسار، فتبقى المراجع الإنجليزية سليمة داخل مراجعة عربية.
+- الجداول العريضة (8 أعمدة فأكثر، مثل مصفوفة الأدلة الكاملة) توضع تلقائيًا في صفحات أفقية.
+- الإعدادات الافتراضية: A4، هوامش 2.54 سم، تباعد 1.5، Times New Roman 12 للاتيني وSimplified Arabic 14 للعربي.
+- البدائل: إن غاب السكربت فنزّله من المستودع، وإن تعذّر Python فاستخدم pandoc أو أداة مستندات مدمجة، وإن تعذّر كل ذلك فسلّم Markdown وصرّح بأن ملف Word لم يُنشأ.
+
+لا تدّعِ إنشاء ملف Word أو مجلد أو مجموعة داخل موصل إلا إذا أُنشئت فعليًا.
 
 ### بوابة الجودة النهائية
 لا تسلّم قبل تحقق ما ينطبق:
@@ -851,5 +876,6 @@ Do not deliver until applicable checks pass:
 - [ ] نمط التوثيق متسق.
 - [ ] لا أعداد PRISMA مختلقة.
 - [ ] لا تُستخدم تسمية "مراجعة منهجية" دون استحقاق.
+- [ ] سُلّم الملفان `.md` و`.docx` (أو صُرّح بعدم إنشاء ملف Word).
 
 ---

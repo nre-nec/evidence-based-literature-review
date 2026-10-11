@@ -66,10 +66,12 @@ You cannot install files yourself.
 
 Pass the single-file text as the system prompt (system message). No discovery mechanism is needed.
 
+> Note: some skills here ship `scripts/` or `assets/`. Paths C, D and E use a single text file, so those files are not available there; the skill's instructions still load.
+
 ## Files
 
 | Skill | Zip (paths A, Claude.ai) | Single-file text (paths D, E) | Cursor rule (path C) |
 |---|---|---|---|
-| `evidence-based-literature-review` | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.zip (28 KB) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.md (6,495 words) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.mdc |
+| `evidence-based-literature-review` | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.zip (38 KB) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.md (7,031 words) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.mdc |
 
 These links follow branch `main`, which always holds the latest version. For a fixed version, replace `main` in these URLs with a release tag or commit hash.
