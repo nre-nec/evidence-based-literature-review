@@ -1,5 +1,23 @@
 # Evidence-Based Literature Review Skill | مهارة المراجعة الأدبية القائمة على الأدلة
 
+<!-- foundry:install:start -->
+> **AI agents / وكلاء الذكاء الاصطناعي:** to install, read [INSTALL.md](https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/INSTALL.md) and follow the path for your environment.
+
+## Install | التثبيت
+
+**Easiest | الأسهل:** give this repository's link to your AI tool and ask it to install the skill. It will read [INSTALL.md](INSTALL.md).
+أعطِ رابط هذا المستودع لأداة الذكاء الاصطناعي التي تستخدمها واطلب منها تثبيت المهارة، وستتبع ملف INSTALL.md.
+
+| Your tool | What to do |
+|---|---|
+| Claude Code | Ask it to install from this link, or copy `skills/evidence-based-literature-review/` to `~/.claude/skills/` |
+| Claude.ai | Download the zip below and upload it in Settings → Skills (if available on your plan) |
+| ChatGPT / Gemini / others | Add the single-file text to a custom GPT, Gem, project or custom instructions |
+| Your own app / API | Use the single-file text as the system prompt |
+
+- `evidence-based-literature-review`: [zip](https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.zip) · [single file](https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.md)
+<!-- foundry:install:end -->
+
 A connector-agnostic, bilingual (Arabic/English) AI skill for producing **traceable, verified, critically appraised** academic literature reviews: narrative, critical, integrative, scoping, or genuinely systematic/PRISMA-aligned.
 
 مهارة ذكاء اصطناعي ثنائية اللغة (عربي/إنجليزي) لإعداد مراجعات أدبية أكاديمية **قابلة للتتبع والتحقق وخاضعة للتقييم النقدي**، ولا ترتبط بموصل أو منصة محددة.
@@ -36,27 +54,9 @@ skills/evidence-based-literature-review/
 │   ├── systematic-prisma.md
 │   └── writing-and-delivery.md
 └── tests/triggers.json      # manual trigger test prompts
+INSTALL.md                   # install guide for AI agents (generated)
+install/                     # zip, single-file text, Cursor rule (generated)
 ```
-
-## Install | التثبيت
-
-### Claude Code
-Copy the skill folder into your personal skills directory (`~/.claude/skills/`):
-
-```bash
-git clone https://github.com/nre-nec/evidence-based-literature-review.git
-cp -r evidence-based-literature-review/skills/evidence-based-literature-review ~/.claude/skills/
-```
-
-On Windows (PowerShell):
-
-```powershell
-git clone https://github.com/nre-nec/evidence-based-literature-review.git
-Copy-Item -Recurse "evidence-based-literature-review\skills\evidence-based-literature-review" "$env:USERPROFILE\.claude\skills\"
-```
-
-### Claude.ai / other models
-Zip the `skills/evidence-based-literature-review` folder and upload it as a skill where supported, or paste `SKILL.md` plus the needed `references/` files as system instructions for any model.
 
 ## Verification status | حالة التحقق
 
