@@ -63,6 +63,7 @@ install/                     # zip, single-file text, Cursor rule (generated)
 | Check | Status |
 |---|---|
 | Structure validated with [skill-foundry](https://github.com/nre-nec/skill-foundry) `validate --strict` | Passed (2026-10-11) |
+| Install from the repository link alone (fresh Claude Code agent, path A, sandbox home) | Passed (2026-10-11): installed files identical to source |
 | Trigger tests in `tests/triggers.json` run in a live environment | Not yet verified |
 | Behaviour tested end-to-end on Claude Code / Claude.ai / other models | Not yet verified |
 

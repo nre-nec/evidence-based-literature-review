@@ -16,28 +16,30 @@ Each skill's source is the folder `skills/<name>/` (entry point `SKILL.md`). The
 
 ## Ground rules
 
-1. Before writing any file on the user's machine, tell them exactly what you will write and where, and wait for their confirmation.
+1. A user asking you to install from this link has approved installing at the default location of the path you choose; tell them where you are writing. Ask first only if you would overwrite an existing install or write somewhere else.
 2. Install only the files listed in this guide, from this repository. Do not execute any script from this repository during installation.
 3. If you do not know how your own environment loads skills or rules, say so and use path D or E. Do not guess directories.
 4. Report honestly what you did, where the files are, and how the user can confirm the skill is loaded.
 
 ## Path A — Claude Code (CLI, desktop app, IDE extensions)
 
-Skills are folders containing `SKILL.md`. Personal scope: `~/.claude/skills/<name>/` (Windows: `%USERPROFILE%\.claude\skills\<name>\`). Project scope: `<project>/.claude/skills/<name>/`.
+Skills are folders containing `SKILL.md`. Default to personal scope, `~/.claude/skills/<name>/` (Windows: `%USERPROFILE%\.claude\skills\<name>\`), which works in every project. Use project scope, `<project>/.claude/skills/<name>/`, only if the user asks for this project only.
 
 ```bash
-git clone --depth 1 --branch main https://github.com/nre-nec/evidence-based-literature-review.git /tmp/skill-src
+SRC=$(mktemp -d)
+git clone --depth 1 --branch main https://github.com/nre-nec/evidence-based-literature-review.git "$SRC"
 mkdir -p ~/.claude/skills
-cp -r /tmp/skill-src/skills/evidence-based-literature-review ~/.claude/skills/
+cp -r "$SRC/skills/evidence-based-literature-review" ~/.claude/skills/
 ```
 
 ```powershell
-git clone --depth 1 --branch main https://github.com/nre-nec/evidence-based-literature-review.git "$env:TEMP\skill-src"
+$src = Join-Path $env:TEMP ([guid]::NewGuid())
+git clone --depth 1 --branch main https://github.com/nre-nec/evidence-based-literature-review.git $src
 New-Item -ItemType Directory -Force "$env:USERPROFILE\.claude\skills" | Out-Null
-Copy-Item -Recurse "$env:TEMP\skill-src\skills\evidence-based-literature-review" "$env:USERPROFILE\.claude\skills\"
+Copy-Item -Recurse "$src\skills\evidence-based-literature-review" "$env:USERPROFILE\.claude\skills\"
 ```
 
-If the temporary folder or `~/.claude/skills/<name>/` already exists (an earlier install), remove it first, after telling the user, so the copy is not nested inside the old one.
+If `~/.claude/skills/<name>/` already exists, this is an update: ask the user, then delete the old folder before copying (otherwise the copy lands nested inside it). At run time only `SKILL.md`, `references/`, `scripts/` and `assets/` matter; `metadata.json` and `tests/` are harmless extras.
 
 Without git: download the zip from the table above and extract it into the skills folder (the zip already contains the top-level `<name>/` folder). Then tell the user to start a new session; the skill should appear in the available skills list.
 
@@ -47,7 +49,7 @@ Some agents load skills from folders containing `SKILL.md` (the same layout as p
 
 ## Path C — Cursor (project rules)
 
-If your Cursor version documents support for `SKILL.md` skill folders, use path B. Otherwise download `install/<name>.mdc` from the table below and save it as `.cursor/rules/<name>.mdc` in the user's project. It is an agent-requested rule: Cursor decides from its description when to apply it.
+If your Cursor version documents support for `SKILL.md` skill folders, use path B. Otherwise download `install/<name>.mdc` (Files table at the end) and save it as `.cursor/rules/<name>.mdc` in the user's project. It is an agent-requested rule: Cursor decides from its description when to apply it.
 
 ## Path D — chat assistants without file-system access (ChatGPT, Gemini, Claude.ai chat, Copilot chat, …)
 
@@ -70,4 +72,4 @@ Pass the single-file text as the system prompt (system message). No discovery me
 |---|---|---|---|
 | `evidence-based-literature-review` | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.zip (28 KB) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.md (6,495 words) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.mdc |
 
-Branch `main` changes over time. For a fixed version, replace `main` in these URLs with a release tag or commit hash.
+These links follow branch `main`, which always holds the latest version. For a fixed version, replace `main` in these URLs with a release tag or commit hash.
