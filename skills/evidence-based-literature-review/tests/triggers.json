@@ -1,0 +1,18 @@
+{
+  "_note": "Manual trigger test set. Run each prompt against your target environment and record whether the skill activated.",
+  "should_trigger": [
+    "اكتب لي مراجعة أدبيات عن أثر الذكاء الاصطناعي على تعليم التمريض لفصل الدكتوراه",
+    "أبغى الدراسات السابقة والفجوة البحثية لموضوع رسالتي عن الاحتراق الوظيفي",
+    "Write a critical literature review on social media use and adolescent sleep, APA 7",
+    "Do a scoping review with an evidence matrix on telehealth adoption in rural clinics",
+    "سوّي مراجعة منهجية وفق PRISMA عن فعالية التعلم بالمحاكاة",
+    "Find recent studies on burnout in ICU nurses and synthesize the findings with research gaps"
+  ],
+  "should_not_trigger": [
+    "لخّص لي هذه الورقة البحثية في فقرة واحدة",
+    "Format these 20 references in APA 7 style",
+    "اكتب مقال رأي عن أهمية القراءة للشباب",
+    "What is the DOI of this single article title?",
+    "Explain what a PRISMA flow diagram is in two sentences"
+  ]
+}

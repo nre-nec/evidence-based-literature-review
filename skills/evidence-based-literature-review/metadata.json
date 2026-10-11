@@ -1,0 +1,68 @@
+{
+  "name": "evidence-based-literature-review",
+  "version": "1.0.0",
+  "description": "Connector-agnostic bilingual Arabic/English protocol for rigorous, evidence-based academic literature reviews that searches, deduplicates, screens, independently verifies DOI/metadata, critically appraises studies, builds an evidence matrix, synthesizes findings, classifies research gaps, audits citations, and delivers narrative, critical, integrative, scoping or genuinely systematic/PRISMA-aligned reviews. Use when the user asks for a literature review, related-work section, theoretical background, research gaps, an evidence matrix, reference/DOI verification inside a review, or a Master's/PhD chapter (e.g. 'اكتب مراجعة أدبيات عن', 'الدراسات السابقة', 'الفجوة البحثية', 'مراجعة منهجية PRISMA', 'write a literature review on'). Do not use for summarizing a single paper, formatting a reference list with no review, or general essays that need no scholarly sources.",
+  "language": "ar+en",
+  "license": "MIT",
+  "entry_points": {
+    "skill": "SKILL.md"
+  },
+  "triggers": {
+    "use_when": [
+      "Write a literature review, related-work section, research or theoretical background",
+      "Conduct a narrative, critical, integrative, scoping, systematic or PRISMA-aligned review",
+      "Find scholarly papers and synthesize them, or update an existing review",
+      "Identify research gaps, contradictions, theoretical trends or methodological weaknesses, or map a field's development",
+      "Build an evidence/study matrix or verify references and DOI metadata within a review",
+      "Prepare a Master's/PhD chapter or publication-ready evidence synthesis"
+    ],
+    "do_not_use_when": [
+      "Summarizing or critiquing a single paper (do it directly)",
+      "Formatting a reference list with no review to write (apply the citation style directly)",
+      "General essays or creative writing that need no scholarly sources",
+      "Requests to fabricate, pad or misrepresent evidence (refuse that part)"
+    ]
+  },
+  "references": [
+    {
+      "file": "references/integrity-rules.md",
+      "title": "Integrity Rules and Shared Operational Rules",
+      "summary": "The 20 integrity rules, source hierarchy, evidence language, stop conditions and completion standard (EN/AR). Read at the start of every review."
+    },
+    {
+      "file": "references/tool-routing.md",
+      "title": "Tool Routing and Capability Check",
+      "summary": "Three-layer architecture, capability-based tool router, fallback protocol and tool neutrality (EN/AR). Read in step 1."
+    },
+    {
+      "file": "references/review-specification.md",
+      "title": "Review Specification",
+      "summary": "Topic and language rules, smart defaults, customization and review-type classification (EN/AR). Read in steps 2-3."
+    },
+    {
+      "file": "references/search-and-screening.md",
+      "title": "Search Model, Eligibility, Search and Screening",
+      "summary": "Question decomposition, frameworks, search bank, eligibility, layered search, deduplication and screening (EN/AR). Read in steps 4-5."
+    },
+    {
+      "file": "references/verification-and-appraisal.md",
+      "title": "Verification, Critical Appraisal and Evidence Matrix",
+      "summary": "Bibliographic verification hierarchy, appraisal instruments and evidence-matrix fields (EN/AR). Read in steps 6-7."
+    },
+    {
+      "file": "references/synthesis-and-gaps.md",
+      "title": "Synthesis, Research Gaps and Theory",
+      "summary": "Analytical synthesis, 12-type gap taxonomy and theoretical analysis (EN/AR). Read in step 8."
+    },
+    {
+      "file": "references/systematic-prisma.md",
+      "title": "Systematic and PRISMA Protocol",
+      "summary": "Protocol items, real-count flow data, honest downgrading and report structure (EN/AR). Read only for systematic/PRISMA work."
+    },
+    {
+      "file": "references/writing-and-delivery.md",
+      "title": "Citation Audit, Writing, Outputs and Quality Gate",
+      "summary": "Citation audit, structures, writing standards, outputs, document delivery and final quality gate (EN/AR). Read in step 10."
+    }
+  ]
+}
