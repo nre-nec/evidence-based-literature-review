@@ -26,6 +26,8 @@ Assess the **study**, not merely the journal. Select an appropriate instrument, 
 
 Record tool, domains, judgment, justification, and implications for synthesis. Keep journal metrics separate from study quality.
 
+**Access caps the rating.** A study read from its abstract only cannot be rated *high* quality: most appraisal domains (method detail, dialogue with opposing views, limitations) are invisible in an abstract. Rate it at most *moderate*, or *not assessable*, and say so. Apply the same rule to every study; do not cite "abstract only" as a reason to downgrade some studies while rating other abstract-only studies high.
+
 ### Step 10 — Evidence matrix
 Build before drafting:
 
@@ -82,6 +84,8 @@ DOI الذي يبدو صحيحًا لا يعد موثقًا حتى يطابق س
 - GRADE ليقين مجموعة الأدلة عند الملاءمة.
 
 سجّل الأداة والمجالات والحكم والمبرر وأثر الجودة في التركيب. افصل مؤشرات المجلة عن جودة الدراسة.
+
+**الوصول يحدّ التقييم.** الدراسة التي لم يُقرأ منها إلا الملخص لا تُقيَّم «عالية الجودة»، لأن أغلب مجالات التقييم (تفاصيل المنهج، والحوار مع المخالف، والقيود) لا تظهر في الملخص. قيّمها «متوسطة» على الأكثر أو «غير قابلة للتقييم»، وصرّح بذلك. وطبّق القاعدة على الجميع: لا تجعل «الملخص فقط» سببًا لخفض بعض الدراسات مع رفع غيرها مما قُرئ ملخصه فقط.
 
 ### الخطوة العاشرة — مصفوفة الأدلة
 أنشئ قبل الكتابة حقولًا تشمل: معرف الدراسة، المؤلف/السنة، العنوان، DOI وحالة التحقق، المصدر، الدولة/السياق، الهدف، التصميم، العينة، الأدوات، المتغيرات، النظرية، النتائج، حجم/اتجاه العلاقة، الإحصاءات المصرح بها، القيود، خطر التحيز، المحور، التناقضات، مساهمة الفجوة، حالة النص الكامل، والملاحظات.

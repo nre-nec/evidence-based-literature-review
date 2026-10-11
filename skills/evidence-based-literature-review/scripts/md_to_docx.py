@@ -27,7 +27,7 @@ RTL_CHARS = r"֐-ࣿיִ-﷿ﹰ-﻿"
 RTL_RE = re.compile(f"[{RTL_CHARS}]")
 LTR_RE = re.compile(r"[A-Za-zÀ-ɏͰ-ϿЀ-ӿ]")
 STRONG_RE = re.compile(f"[{RTL_CHARS}A-Za-zÀ-ɏͰ-ϿЀ-ӿ]")
-REF_HEADING_RE = re.compile(r"^\s*(references|reference list|bibliography|works cited|المراجع|قائمة المراجع|المصادر والمراجع)\b", re.I)
+REF_HEADING_RE = re.compile(r"^\s*(?:[\d٠-٩]+[.)\-]?\s*)?(references|reference list|bibliography|works cited|المراجع|قائمة المراجع|المصادر والمراجع)\b", re.I)
 
 HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
 HR_RE = re.compile(r"^\s{0,3}([-*_])(\s*\1){2,}\s*$")
@@ -48,6 +48,8 @@ PORTRAIT = '<w:pgSz w:w="11906" w:h="16838"/>'
 LANDSCAPE = '<w:pgSz w:w="16838" w:h="11906" w:orient="landscape"/>'
 MARGINS = '<w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440" w:header="708" w:footer="708" w:gutter="0"/>'
 WIDE_TABLE_COLS = 8  # tables with this many columns or more get landscape pages
+TEXT_HEAVY_COLS = 6  # ...and so do tables from 6 columns whose rows are long prose
+TEXT_HEAVY_ROW_CHARS = 200
 
 W_NS = (
     'xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" '
@@ -299,13 +301,15 @@ def convert(md: str, doc: Doc) -> None:
             while i < n and lines[i].strip().startswith("|"):
                 rows.append(split_row(lines[i]))
                 i += 1
-            wide = max([len(header)] + [len(r) for r in rows]) >= WIDE_TABLE_COLS
+            ncols = max([len(header)] + [len(r) for r in rows])
+            avg_row = sum(len("".join(r)) for r in rows) / max(len(rows), 1)
+            wide = ncols >= WIDE_TABLE_COLS or (ncols >= TEXT_HEAVY_COLS and avg_row >= TEXT_HEAVY_ROW_CHARS)
             if wide:  # close the portrait section, put the table (and its heading) in a landscape section
                 at = len(doc.body) - 1 if doc.body and doc.body[-1] is last_heading else len(doc.body)
-                doc.body.insert(at, section_break(doc, PORTRAIT))
-            doc.body.append(table_xml(doc, header, rows, aligns))
+                end_section(doc, at, PORTRAIT)
+            doc.body.append(table_xml(doc, header, rows, aligns, wide))
             if wide:
-                doc.body.append(section_break(doc, LANDSCAPE))
+                end_section(doc, len(doc.body), LANDSCAPE)
             doc.counts["tables"] += 1
             flush_list()
             continue
@@ -339,6 +343,10 @@ def convert(md: str, doc: Doc) -> None:
                 text += " " + lines[i].strip()
                 i += 1
             text = re.sub(r"^\[ \]\s*", "☐ ", re.sub(r"^\[[xX]\]\s*", "☑ ", text))
+            if in_refs:  # APA: reference entries are hanging-indent paragraphs, never bullets
+                doc.cur_rtl = is_rtl(text)
+                doc.body.append(doc.para(doc.inline(text), doc.cur_rtl, None, '<w:ind w:left="720" w:hanging="720"/>'))
+                continue
             for deeper in [lv for lv in list_state if lv > level]:
                 del list_state[deeper]
             key = level
@@ -371,13 +379,24 @@ def convert(md: str, doc: Doc) -> None:
         flush_list()
 
 
-def section_break(doc: Doc, size: str) -> str:
-    """A paragraph whose sectPr ends the current section with the given page size."""
-    bidi = "<w:bidi/>" if doc.rtl_doc else ""
-    return f'<w:p><w:pPr><w:sectPr>{size}{MARGINS}{bidi}</w:sectPr></w:pPr></w:p>'
+def end_section(doc: Doc, at: int, size: str) -> None:
+    """End the section just before body index `at` with the given page size.
+
+    The sectPr goes into the preceding paragraph, as Word does, so no extra line is
+    added. After a table there is no paragraph to reuse, so a 1pt-high one carries it;
+    a normal-height empty paragraph would spill onto a blank page when the table
+    fills the last page.
+    """
+    sect = f"<w:sectPr>{size}{MARGINS}" + ("<w:bidi/>" if doc.rtl_doc else "") + "</w:sectPr>"
+    prev = doc.body[at - 1] if at > 0 else ""
+    if prev.startswith("<w:p><w:pPr>") and "<w:sectPr>" not in prev:
+        doc.body[at - 1] = prev.replace("</w:pPr>", sect + "</w:pPr>", 1)
+        return
+    tiny = '<w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/><w:rPr><w:sz w:val="2"/><w:szCs w:val="2"/></w:rPr>'
+    doc.body.insert(at, f"<w:p><w:pPr>{tiny}{sect}</w:pPr></w:p>")
 
 
-def table_xml(doc: Doc, header: list[str], rows: list[list[str]], aligns: list) -> str:
+def table_xml(doc: Doc, header: list[str], rows: list[list[str]], aligns: list, wide: bool = False) -> str:
     ncols = max([len(header)] + [len(r) for r in rows])
     rtl = is_rtl(" ".join(header))
 
@@ -394,13 +413,13 @@ def table_xml(doc: Doc, header: list[str], rows: list[list[str]], aligns: list) 
         trpr = "<w:trPr><w:tblHeader/><w:cantSplit/></w:trPr>" if head else "<w:trPr><w:cantSplit/></w:trPr>"
         return f"<w:tr>{trpr}{''.join(cell(c, k, head) for k, c in enumerate(cells))}</w:tr>"
 
-    grid = "".join('<w:gridCol w:w="%d"/>' % ((13900 if ncols >= WIDE_TABLE_COLS else 9000) // ncols) for _ in range(ncols))
+    grid = "".join('<w:gridCol w:w="%d"/>' % ((13900 if wide else 9000) // ncols) for _ in range(ncols))
     bidi = "<w:bidiVisual/>" if rtl else ""
     return (
         f'<w:tbl><w:tblPr><w:tblStyle w:val="ReviewTable"/>{bidi}<w:tblW w:w="5000" w:type="pct"/>'
         f'<w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="0" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>'
         f"</w:tblPr><w:tblGrid>{grid}</w:tblGrid>{row(header, True)}{''.join(row(r, False) for r in rows)}</w:tbl>"
-        + ("" if ncols >= WIDE_TABLE_COLS else "<w:p/>")
+        + ("" if wide else "<w:p/>")
     )
 
 

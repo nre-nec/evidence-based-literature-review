@@ -1,6 +1,6 @@
 {
   "name": "evidence-based-literature-review",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Connector-agnostic bilingual Arabic/English protocol for rigorous, evidence-based academic literature reviews that searches, deduplicates, screens, independently verifies DOI/metadata, critically appraises studies, builds an evidence matrix, synthesizes findings, classifies research gaps, audits citations, and delivers narrative, critical, integrative, scoping or genuinely systematic/PRISMA-aligned reviews. Use when the user asks for a literature review, related-work section, theoretical background, research gaps, an evidence matrix, reference/DOI verification inside a review, or a Master's/PhD chapter (e.g. 'اكتب مراجعة أدبيات عن', 'الدراسات السابقة', 'الفجوة البحثية', 'مراجعة منهجية PRISMA', 'write a literature review on'). Do not use for summarizing a single paper, formatting a reference list with no review, or general essays that need no scholarly sources.",
   "language": "ar+en",
   "license": "MIT",

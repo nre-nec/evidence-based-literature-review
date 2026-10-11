@@ -72,6 +72,6 @@ Pass the single-file text as the system prompt (system message). No discovery me
 
 | Skill | Zip (paths A, Claude.ai) | Single-file text (paths D, E) | Cursor rule (path C) |
 |---|---|---|---|
-| `evidence-based-literature-review` | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.zip (38 KB) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.md (7,072 words) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.mdc |
+| `evidence-based-literature-review` | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.zip (39 KB) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.md (7,254 words) | https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.mdc |
 
 These links follow branch `main`, which always holds the latest version. For a fixed version, replace `main` in these URLs with a release tag or commit hash.

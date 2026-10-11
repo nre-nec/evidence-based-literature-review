@@ -66,9 +66,9 @@ Deliver two files unless the user asks otherwise: `<slug>.md` (source) and `<slu
 - headings `#` to `####`; one `#` title at the top;
 - paragraphs, `**bold**`, `*italic*` (for journal names and volumes in APA), inline `code`;
 - bullet and numbered lists, up to 3 levels (indent 2 spaces per level);
-- pipe tables with a header row; the full evidence matrix may have many columns — tables with 8+ columns are placed on landscape pages automatically;
+- pipe tables with a header row; tables with 8+ columns, or 6+ columns of long prose (e.g. the gap map), are placed on landscape pages automatically;
 - `> quotes`, `---` rules, links `[text](url)` and bare `https://doi.org/...` (become clickable);
-- put the reference list under a heading named `References` / `المراجع` so entries get a hanging indent;
+- put the reference list under a heading named `References` / `المراجع` (a number before it, like `9. المراجع`, is fine); write each entry as its own paragraph. Entries written as list items are converted to hanging-indent paragraphs too, never bullets (APA);
 - no images, footnotes, HTML or math (images keep only their alt text).
 
 **Direction:** each paragraph takes the direction of its first letter (Arabic → RTL, Latin → LTR), so an Arabic review keeps English reference entries left-to-right. Short parenthetical citations in the other script, e.g. `(Smith & Lee, 2020)`, are kept on one line.
@@ -154,9 +154,9 @@ Do not deliver until applicable checks pass:
 سلّم ملفين ما لم يطلب المستخدم غير ذلك: `<slug>.md` (المصدر) و`<slug>.docx` (Word قابل للتعديل)، بالمحتوى نفسه.
 
 - اكتب Markdown بالعناصر التي يدعمها المحوّل فقط: عناوين، فقرات، غامق ومائل، قوائم حتى 3 مستويات، جداول، اقتباسات، روابط وDOI. ولا تستخدم صورًا أو حواشي أو HTML.
-- ضع قائمة المراجع تحت عنوان «المراجع» أو `References` لتحصل على مسافة بادئة معلّقة.
+- ضع قائمة المراجع تحت عنوان «المراجع» أو `References` (ويجوز ترقيمه مثل «9. المراجع»)، واكتب كل مرجع فقرة مستقلة. وإن كُتبت المراجع قائمة نقطية فيحوّلها المحوّل إلى فقرات بمسافة بادئة معلّقة بلا نقاط، كما يقتضي APA.
 - اتجاه كل فقرة يتحدد بأول حرف فيها: العربية من اليمين، والإنجليزية من اليسار، فتبقى المراجع الإنجليزية سليمة داخل مراجعة عربية.
-- الجداول العريضة (8 أعمدة فأكثر، مثل مصفوفة الأدلة الكاملة) توضع تلقائيًا في صفحات أفقية.
+- الجداول العريضة (8 أعمدة فأكثر، أو 6 أعمدة فأكثر بنص طويل مثل خريطة الفجوات) توضع تلقائيًا في صفحات أفقية.
 - الإعدادات الافتراضية: A4، هوامش 2.54 سم، تباعد 1.5، Times New Roman 12 للاتيني وSimplified Arabic 14 للعربي.
 - البدائل: إن غاب السكربت فنزّله من المستودع، وإن تعذّر Python فاستخدم pandoc أو أداة مستندات مدمجة، وإن تعذّر كل ذلك فسلّم Markdown وصرّح بأن ملف Word لم يُنشأ.
 

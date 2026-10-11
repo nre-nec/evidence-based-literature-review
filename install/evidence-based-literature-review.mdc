@@ -53,7 +53,7 @@ You turn a topic, research question or working title into a **traceable, verifie
 10. **Draft, audit, deliver | الكتابة والتدقيق والتسليم** — choose the structure, apply level-appropriate writing standards, run the citation audit, produce the standard outputs, and pass the final quality gate. Read writing-and-delivery [-> appendix: references/writing-and-delivery.md].
 11. **Two files: Markdown + Word | ملفان: Markdown وWord** — unless the user asks otherwise, deliver **both** `<slug>.md` and an editable `<slug>.docx`:
     1. Write the full review to `<slug>.md` first; it is the single source.
-    2. Convert it: `python scripts/md_to_docx.py <slug>.md` (path relative to this skill's folder; standard-library Python 3.9+, nothing to install). It handles Arabic RTL and English LTR per paragraph, tables, lists, links, hanging-indent references, and puts wide tables (8+ columns, e.g. the full evidence matrix) on landscape pages.
+    2. Convert it: `python scripts/md_to_docx.py <slug>.md` (path relative to this skill's folder; standard-library Python 3.9+, nothing to install). It handles Arabic RTL and English LTR per paragraph, tables, lists, links, hanging-indent references, and puts wide tables (8+ columns, or 6+ columns of long prose — evidence matrix, gap map) on landscape pages.
     3. If `scripts/md_to_docx.py` is not present (single-file installs), download it from `https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/skills/evidence-based-literature-review/scripts/md_to_docx.py` and run it. If Python cannot run, use any Word-generation capability you have (e.g. `pandoc <slug>.md -o <slug>.docx`, or a built-in document tool).
     4. Confirm the `.docx` exists and report the converter's summary line. If no route works, deliver the `.md`, say plainly that the Word file was **not** produced, and give the user the exact command to run.
 
@@ -488,6 +488,8 @@ Assess the **study**, not merely the journal. Select an appropriate instrument, 
 
 Record tool, domains, judgment, justification, and implications for synthesis. Keep journal metrics separate from study quality.
 
+**Access caps the rating.** A study read from its abstract only cannot be rated *high* quality: most appraisal domains (method detail, dialogue with opposing views, limitations) are invisible in an abstract. Rate it at most *moderate*, or *not assessable*, and say so. Apply the same rule to every study; do not cite "abstract only" as a reason to downgrade some studies while rating other abstract-only studies high.
+
 ### Step 10 — Evidence matrix
 Build before drafting:
 
@@ -544,6 +546,8 @@ DOI الذي يبدو صحيحًا لا يعد موثقًا حتى يطابق س
 - GRADE ليقين مجموعة الأدلة عند الملاءمة.
 
 سجّل الأداة والمجالات والحكم والمبرر وأثر الجودة في التركيب. افصل مؤشرات المجلة عن جودة الدراسة.
+
+**الوصول يحدّ التقييم.** الدراسة التي لم يُقرأ منها إلا الملخص لا تُقيَّم «عالية الجودة»، لأن أغلب مجالات التقييم (تفاصيل المنهج، والحوار مع المخالف، والقيود) لا تظهر في الملخص. قيّمها «متوسطة» على الأكثر أو «غير قابلة للتقييم»، وصرّح بذلك. وطبّق القاعدة على الجميع: لا تجعل «الملخص فقط» سببًا لخفض بعض الدراسات مع رفع غيرها مما قُرئ ملخصه فقط.
 
 ### الخطوة العاشرة — مصفوفة الأدلة
 أنشئ قبل الكتابة حقولًا تشمل: معرف الدراسة، المؤلف/السنة، العنوان، DOI وحالة التحقق، المصدر، الدولة/السياق، الهدف، التصميم، العينة، الأدوات، المتغيرات، النظرية، النتائج، حجم/اتجاه العلاقة، الإحصاءات المصرح بها، القيود، خطر التحيز، المحور، التناقضات، مساهمة الفجوة، حالة النص الكامل، والملاحظات.
@@ -761,9 +765,9 @@ Deliver two files unless the user asks otherwise: `<slug>.md` (source) and `<slu
 - headings `#` to `####`; one `#` title at the top;
 - paragraphs, `**bold**`, `*italic*` (for journal names and volumes in APA), inline `code`;
 - bullet and numbered lists, up to 3 levels (indent 2 spaces per level);
-- pipe tables with a header row; the full evidence matrix may have many columns — tables with 8+ columns are placed on landscape pages automatically;
+- pipe tables with a header row; tables with 8+ columns, or 6+ columns of long prose (e.g. the gap map), are placed on landscape pages automatically;
 - `> quotes`, `---` rules, links `text [-> appendix: url]` and bare `https://doi.org/...` (become clickable);
-- put the reference list under a heading named `References` / `المراجع` so entries get a hanging indent;
+- put the reference list under a heading named `References` / `المراجع` (a number before it, like `9. المراجع`, is fine); write each entry as its own paragraph. Entries written as list items are converted to hanging-indent paragraphs too, never bullets (APA);
 - no images, footnotes, HTML or math (images keep only their alt text).
 
 **Direction:** each paragraph takes the direction of its first letter (Arabic → RTL, Latin → LTR), so an Arabic review keeps English reference entries left-to-right. Short parenthetical citations in the other script, e.g. `(Smith & Lee, 2020)`, are kept on one line.
@@ -849,9 +853,9 @@ Do not deliver until applicable checks pass:
 سلّم ملفين ما لم يطلب المستخدم غير ذلك: `<slug>.md` (المصدر) و`<slug>.docx` (Word قابل للتعديل)، بالمحتوى نفسه.
 
 - اكتب Markdown بالعناصر التي يدعمها المحوّل فقط: عناوين، فقرات، غامق ومائل، قوائم حتى 3 مستويات، جداول، اقتباسات، روابط وDOI. ولا تستخدم صورًا أو حواشي أو HTML.
-- ضع قائمة المراجع تحت عنوان «المراجع» أو `References` لتحصل على مسافة بادئة معلّقة.
+- ضع قائمة المراجع تحت عنوان «المراجع» أو `References` (ويجوز ترقيمه مثل «9. المراجع»)، واكتب كل مرجع فقرة مستقلة. وإن كُتبت المراجع قائمة نقطية فيحوّلها المحوّل إلى فقرات بمسافة بادئة معلّقة بلا نقاط، كما يقتضي APA.
 - اتجاه كل فقرة يتحدد بأول حرف فيها: العربية من اليمين، والإنجليزية من اليسار، فتبقى المراجع الإنجليزية سليمة داخل مراجعة عربية.
-- الجداول العريضة (8 أعمدة فأكثر، مثل مصفوفة الأدلة الكاملة) توضع تلقائيًا في صفحات أفقية.
+- الجداول العريضة (8 أعمدة فأكثر، أو 6 أعمدة فأكثر بنص طويل مثل خريطة الفجوات) توضع تلقائيًا في صفحات أفقية.
 - الإعدادات الافتراضية: A4، هوامش 2.54 سم، تباعد 1.5، Times New Roman 12 للاتيني وSimplified Arabic 14 للعربي.
 - البدائل: إن غاب السكربت فنزّله من المستودع، وإن تعذّر Python فاستخدم pandoc أو أداة مستندات مدمجة، وإن تعذّر كل ذلك فسلّم Markdown وصرّح بأن ملف Word لم يُنشأ.
 
