@@ -191,6 +191,25 @@ def split_scripts(text: str, para_rtl: bool = False) -> list[str]:
             if body:
                 b[0] = a[0][len(body):] + b[0]
                 a[0] = body
+    if not para_rtl:
+        # In a left-to-right paragraph only the Arabic letters themselves run right-to-left:
+        # "(العتيبي, 2022)" must read name-then-year, so brackets, commas and digits stay LTR.
+        trimmed: list[list] = []
+        for t, r in segs:
+            hits = [k for k, ch in enumerate(t) if RTL_RE.match(ch)] if r else []
+            if not hits:
+                trimmed.append([t, False if r else r])
+                continue
+            a, b = hits[0], hits[-1] + 1
+            trimmed += [[t[:a], False], [t[a:b], True], [t[b:], False]]
+        segs = []
+        for t, r in trimmed:
+            if not t:
+                continue
+            if segs and segs[-1][1] == r:
+                segs[-1][0] += t
+            else:
+                segs.append([t, r])
     out = []
     for t, r in segs:
         # An embedded citation such as "(Smith & Lee, 2020)" must not wrap: a line break inside

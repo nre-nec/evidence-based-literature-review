@@ -67,7 +67,7 @@ install/                     # zip, single-file text, Cursor rule (generated)
 |---|---|
 | Structure validated with [skill-foundry](https://github.com/nre-nec/skill-foundry) `validate --strict` | Passed (2026-10-11) |
 | Install from the repository link alone (fresh Claude Code agent, path A, sandbox home) | Passed (2026-10-11): installed files identical to source |
-| Word output: `md_to_docx.py` on an Arabic/English fixture, opened in Microsoft Word 16 (Windows 11) | Passed (2026-10-11): RTL/LTR paragraphs, RTL table, lists, links, hanging references, landscape evidence matrix |
+| Word output: `md_to_docx.py` on Arabic and English fixtures, opened in Microsoft Word 16 (Windows 11) | Passed (2026-10-11): RTL/LTR paragraphs, embedded citations in both directions, RTL table, lists, links, hanging references, landscape evidence matrix |
 | Skill used in Cursor | Reported working by the user (2026-10-11), before the Word output was added |
 | Trigger tests in `tests/triggers.json` run in a live environment | Not yet verified |
 | Behaviour tested end-to-end on Claude Code / Claude.ai / other models | Not yet verified |
