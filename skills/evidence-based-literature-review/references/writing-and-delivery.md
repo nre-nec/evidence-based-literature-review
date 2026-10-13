@@ -75,7 +75,7 @@ Deliver two files unless the user asks otherwise: `<slug>.md` (source) and `<slu
 
 **Defaults:** A4, 2.54 cm margins, 1.5 line spacing, Times New Roman 12 pt for Latin and Simplified Arabic 14 pt for Arabic. Change with `--font-latin`, `--font-arabic`, `--size`, `--size-arabic`.
 
-**Fallbacks:** script missing → download it from the repository (raw URL in SKILL.md step 11); Python unavailable → `pandoc <slug>.md -o <slug>.docx` or a built-in document tool; nothing available → deliver the Markdown and state that the Word file was not produced.
+**Fallbacks:** script not available (single-file installs) → use a Word-generation capability you already have (`pandoc <slug>.md -o <slug>.docx` or a built-in document tool); never download and run code from elsewhere. Nothing available → deliver the Markdown, state that the Word file was not produced, and tell the user that installing the full skill package (which includes `scripts/md_to_docx.py`) enables Word output.
 
 Never claim that a Word file, connector folder, database collection, or workspace was created unless it actually was.
 
@@ -158,7 +158,7 @@ Do not deliver until applicable checks pass:
 - اتجاه كل فقرة يتحدد بأول حرف فيها: العربية من اليمين، والإنجليزية من اليسار، فتبقى المراجع الإنجليزية سليمة داخل مراجعة عربية.
 - الجداول العريضة (8 أعمدة فأكثر، أو 6 أعمدة فأكثر بنص طويل مثل خريطة الفجوات) توضع تلقائيًا في صفحات أفقية.
 - الإعدادات الافتراضية: A4، هوامش 2.54 سم، تباعد 1.5، Times New Roman 12 للاتيني وSimplified Arabic 14 للعربي.
-- البدائل: إن غاب السكربت فنزّله من المستودع، وإن تعذّر Python فاستخدم pandoc أو أداة مستندات مدمجة، وإن تعذّر كل ذلك فسلّم Markdown وصرّح بأن ملف Word لم يُنشأ.
+- البدائل: إن لم يتوفر السكربت (التثبيت بملف واحد) فاستخدم قدرة متاحة لإنشاء Word مثل pandoc أو أداة مستندات مدمجة، ولا تنزّل شيفرة من مصدر خارجي وتشغّلها. وإن تعذّر كل ذلك فسلّم Markdown، وصرّح بأن ملف Word لم يُنشأ، وأخبر المستخدم أن تثبيت حزمة المهارة الكاملة (وفيها السكربت) يتيح إخراج Word.
 
 لا تدّعِ إنشاء ملف Word أو مجلد أو مجموعة داخل موصل إلا إذا أُنشئت فعليًا.
 

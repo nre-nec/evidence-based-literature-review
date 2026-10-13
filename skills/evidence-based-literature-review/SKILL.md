@@ -46,7 +46,7 @@ You turn a topic, research question or working title into a **traceable, verifie
 11. **Two files: Markdown + Word | ملفان: Markdown وWord** — unless the user asks otherwise, deliver **both** `<slug>.md` and an editable `<slug>.docx`:
     1. Write the full review to `<slug>.md` first; it is the single source.
     2. Convert it: `python scripts/md_to_docx.py <slug>.md` (path relative to this skill's folder; standard-library Python 3.9+, nothing to install). It handles Arabic RTL and English LTR per paragraph, tables, lists, links, hanging-indent references, and puts wide tables (8+ columns, or 6+ columns of long prose — evidence matrix, gap map) on landscape pages.
-    3. If `scripts/md_to_docx.py` is not present (single-file installs), download it from `https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/skills/evidence-based-literature-review/scripts/md_to_docx.py` and run it. If Python cannot run, use any Word-generation capability you have (e.g. `pandoc <slug>.md -o <slug>.docx`, or a built-in document tool).
+    3. If the script is not available in your environment (single-file installs), do not fetch code from elsewhere. Use a Word-generation capability you already have (e.g. `pandoc <slug>.md -o <slug>.docx`, or a built-in document tool).
     4. Confirm the `.docx` exists and report the converter's summary line. If no route works, deliver the `.md`, say plainly that the Word file was **not** produced, and give the user the exact command to run.
 
 ## القواعد والممنوعات (Rules)

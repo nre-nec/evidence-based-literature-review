@@ -23,7 +23,7 @@ import zipfile
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-RTL_CHARS = r"֐-ࣿיִ-﷿ﹰ-﻿"
+RTL_CHARS = "\u0590-\u08FF\uFB1D-\uFDFF\uFE70-\uFEFF"  # Hebrew/Arabic blocks and presentation forms
 RTL_RE = re.compile(f"[{RTL_CHARS}]")
 LTR_RE = re.compile(r"[A-Za-zÀ-ɏͰ-ϿЀ-ӿ]")
 STRONG_RE = re.compile(f"[{RTL_CHARS}A-Za-zÀ-ɏͰ-ϿЀ-ӿ]")
@@ -41,7 +41,7 @@ INLINE_RE = re.compile(
     r"|(?P<link>\[(?P<ltext>[^\]]+)\]\((?P<lurl>[^)\s]+)\))"
     r"|(?P<url>https?://[^\s<>()\[\]]+[^\s<>()\[\].,;:])"
 )
-ESCAPES = {"\\*": "", "\\_": "", "\\`": "", "\\|": "", "\\[": "", "\\]": "", "\\#": ""}
+ESCAPES = {"\\*": "\uE000", "\\_": "\uE001", "\\`": "\uE002", "\\|": "\uE003", "\\[": "\uE004", "\\]": "\uE005", "\\#": "\uE006"}
 UNESCAPE = {v: k[1] for k, v in ESCAPES.items()}
 
 PORTRAIT = '<w:pgSz w:w="11906" w:h="16838"/>'
@@ -218,7 +218,7 @@ def split_scripts(text: str, para_rtl: bool = False) -> list[str]:
         # a run of the opposite direction scatters its brackets across two lines.
         if r is not None and r != para_rtl and re.fullmatch(r"\s*[(\[][^()\[\]]{1,60}[)\]][.,;:]?\s*", t):
             core = t.strip()
-            t = t[: len(t) - len(t.lstrip())] + core.replace(" ", " ") + t[len(t.rstrip()):]
+            t = t[: len(t) - len(t.lstrip())] + core.replace(" ", "\u00A0") + t[len(t.rstrip()):]
         if t:
             out.append(t)
     return out

@@ -11,11 +11,11 @@
 | Your tool | What to do |
 |---|---|
 | Claude Code | Ask it to install from this link, or copy `skills/evidence-based-literature-review/` to `~/.claude/skills/` |
-| Claude.ai | Download the zip below and upload it in Settings → Skills (if available on your plan) |
+| Claude.ai / ChatGPT skills | Upload the zip below in the app's skills settings. If its safety scan rejects code, use the zip without code |
 | ChatGPT / Gemini / others | Add the single-file text to a custom GPT, Gem, project or custom instructions |
 | Your own app / API | Use the single-file text as the system prompt |
 
-- `evidence-based-literature-review`: [zip](https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.zip) · [single file](https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.md)
+- `evidence-based-literature-review`: [zip](https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.zip) · [zip without code](https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review-text-only.zip) · [single file](https://raw.githubusercontent.com/nre-nec/evidence-based-literature-review/main/install/evidence-based-literature-review.md)
 <!-- foundry:install:end -->
 
 A connector-agnostic, bilingual (Arabic/English) AI skill for producing **traceable, verified, critically appraised** academic literature reviews: narrative, critical, integrative, scoping, or genuinely systematic/PRISMA-aligned.
@@ -70,6 +70,7 @@ install/                     # zip, single-file text, Cursor rule (generated)
 | Word output: `md_to_docx.py` on Arabic and English fixtures, opened in Microsoft Word 16 (Windows 11) | Passed (2026-10-11): RTL/LTR paragraphs, embedded citations in both directions, RTL table, lists, links, hanging references, landscape evidence matrix |
 | Skill used in Cursor | Reported working by the user (2026-10-11), before the Word output was added |
 | Real review run in Cursor (Arabic, rhetoric, 28 references) audited | 2026-10-11: all 9 DOIs match Crossref; all 10 outputs present; no PRISMA claim; 28 matrix rows = 28 references. Found and fixed: bulleted references in Word, portrait gap map, a blank page, inconsistent rating of abstract-only studies |
+| ChatGPT skills upload | 2026-10-13: v1.2.0 rejected (`skill did not pass the safety scan`). Probable causes removed in v1.3.0: an instruction to download and run the script from the web, hidden HTML comments in the single-file text, an invisible U+FEFF character in the script. Re-upload: not yet verified. Fallback: `install/evidence-based-literature-review-text-only.zip` |
 | Trigger tests in `tests/triggers.json` run in a live environment | Not yet verified |
 | Behaviour tested end-to-end on Claude Code / Claude.ai / other models | Not yet verified |
 
